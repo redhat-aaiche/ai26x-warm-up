@@ -1,0 +1,50 @@
+python -m venv my_env
+
+source ./my_env/bin/activate
+
+
+pip install fastapi
+pip install uvicorn
+pip install httpie
+pip install requests
+pip install httpx
+
+vim -c 'set paste' hello.py
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/hi")
+def greet():
+    return "Hello? World?"
+
+
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/hi")
+def greet():
+    return "Hello? World?"
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("hello:app", reload=True)
+
+
+python hello.py
+
+firefox http://localhost:8000/hi &
+
+
+python
+>>> import requests
+>>> r = requests.get("http://localhost:8000/hi")
+>>> r.json()
+'Hello? World?'
+
+
+
+$ http -v localhost:8000/hi
+

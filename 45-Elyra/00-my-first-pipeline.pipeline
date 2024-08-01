@@ -1,0 +1,350 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "7c57bc4d-dd56-4297-8de3-c55359516b2d",
+          "type": "execution_node",
+          "op": "execute-python-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [
+                "data/noaa-weather-data-jfk-airport/jfk_weather.csv"
+              ],
+              "env_vars": [
+                {
+                  "env_var": "DATASET_URL",
+                  "value": "https://dax-cdn.cdn.appdomain.cloud/dax-noaa-weather-data-jfk-airport/1.1.4/noaa-weather-data-jfk-airport.tar.gz"
+                }
+              ],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "examples/pipelines/introduction-to-generic-pipelines/load_data.py",
+              "runtime_image": "amancevice/pandas@sha256:f74bef70689b19d3cd610ef67227fce1c9a6ed8fa950ac2aff39ce72310d5520"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "load_data.py",
+              "image": "/static/elyra/python.svg",
+              "x_pos": 91,
+              "y_pos": 239,
+              "description": "Run Python script"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "51d516e2-631c-4a8d-ad56-ad5c4001da08",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [
+                "data/noaa-weather-data-jfk-airport/jfk_weather_cleaned.csv"
+              ],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "examples/pipelines/introduction-to-generic-pipelines/Part 1 - Data Cleaning.ipynb",
+              "runtime_image": "amancevice/pandas@sha256:f74bef70689b19d3cd610ef67227fce1c9a6ed8fa950ac2aff39ce72310d5520"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Part 1 - Data Cleaning.ipynb",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 315,
+              "y_pos": 232,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "61e3d440-3bea-4bfc-9074-c05e5dfca7c9",
+                  "node_id_ref": "7c57bc4d-dd56-4297-8de3-c55359516b2d",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2afd011c-d154-4111-a22e-c454d5f5e148",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "examples/pipelines/introduction-to-generic-pipelines/Part 2 - Data Analysis.ipynb",
+              "runtime_image": "amancevice/pandas@sha256:f74bef70689b19d3cd610ef67227fce1c9a6ed8fa950ac2aff39ce72310d5520"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Part 2 - Data Analysis.ipynb",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 661,
+              "y_pos": 154,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "b4cf951c-03fc-4709-92c9-a446709a5b25",
+                  "node_id_ref": "51d516e2-631c-4a8d-ad56-ad5c4001da08",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "26071148-a6d6-4823-b5fa-3c0b60a7205d",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "examples/pipelines/introduction-to-generic-pipelines/Part 3 - Time Series Forecasting.ipynb",
+              "runtime_image": "amancevice/pandas@sha256:f74bef70689b19d3cd610ef67227fce1c9a6ed8fa950ac2aff39ce72310d5520"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Part 3 - Time Series Forecasting.ipynb",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 656,
+              "y_pos": 308,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "72adcc5a-645c-4d30-bdcb-7a34e88242b5",
+                  "node_id_ref": "51d516e2-631c-4a8d-ad56-ad5c4001da08",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": [
+            {
+              "id": "7bd569d9-121a-4fe6-89b6-1d0c102c866f",
+              "x_pos": 62,
+              "y_pos": 70,
+              "width": 250,
+              "height": 65,
+              "content": "what this node is doing:\n** Download the datase It needs to read a Variable to locate the source dataset path \n\n",
+              "associated_id_refs": [
+                {
+                  "id": "bc0eafa2-7519-40e2-a762-bbeb7000815d",
+                  "node_ref": "7c57bc4d-dd56-4297-8de3-c55359516b2d"
+                }
+              ]
+            },
+            {
+              "id": "50cdd17b-ce80-4434-95e7-b0ec31380ff9",
+              "x_pos": 352,
+              "y_pos": 81,
+              "width": 175,
+              "height": 30,
+              "content": "Clean the Dataset",
+              "associated_id_refs": [
+                {
+                  "id": "af5201ba-f23d-47ff-b050-d423bbafd5f8",
+                  "node_ref": "51d516e2-631c-4a8d-ad56-ad5c4001da08"
+                }
+              ]
+            },
+            {
+              "id": "2da750b7-9244-4e24-9933-d2fd509817bd",
+              "x_pos": 628,
+              "y_pos": 61,
+              "width": 175,
+              "height": 44,
+              "content": "Analyze the data",
+              "associated_id_refs": [
+                {
+                  "id": "629a1531-13b0-46ea-9b39-f7da88d1eaae",
+                  "node_ref": "2afd011c-d154-4111-a22e-c454d5f5e148"
+                }
+              ]
+            },
+            {
+              "id": "ceb5231b-511d-4bf4-81b8-5e1ac0cda975",
+              "x_pos": 595,
+              "y_pos": 454,
+              "width": 175,
+              "height": 72,
+              "content": "Explore approaches to predicting future temperatures\n",
+              "associated_id_refs": [
+                {
+                  "id": "38026d51-6abb-4dbf-aa68-1fec3b298349",
+                  "node_ref": "26071148-a6d6-4823-b5fa-3c0b60a7205d"
+                }
+              ]
+            }
+          ]
+        },
+        "version": 8,
+        "properties": {
+          "name": "my-first-pipeline",
+          "runtime": "Generic",
+          "pipeline_defaults": {
+            "kubernetes_pod_annotations": [],
+            "kubernetes_pod_labels": [],
+            "mounted_volumes": [],
+            "kubernetes_tolerations": [],
+            "kubernetes_shared_mem_size": {},
+            "env_vars": [],
+            "kubernetes_secrets": []
+          }
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}

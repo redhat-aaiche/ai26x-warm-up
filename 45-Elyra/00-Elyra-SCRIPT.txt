@@ -1,0 +1,106 @@
+https://developer.ibm.com/articles/create-ai-pipelines-using-elyra-and-kubeflow-pipelines/#ways-to-try-elyra-and-pipelines7
+
+Using a Notebook Image without Elyra Extension :
+	--> Get the Notebook Image :
+		podman image pull quay.io/aaiche/ai263-my-notebook-image
+		podman image ls
+
+
+	--> Execute Locally the Jupyter Notebook Image :
+		podman run -it -p 4242:8888 quay.io/aaiche/ai263-my-notebook-image
+		podman exec -l jupyter server list
+
+
+	--> Open the Notebook :
+		firefox http://localhost:4242/lab?token=<token>
+
+
+
+JupyterLab Extensions :
+	https://jupyterlab.readthedocs.io/en/stable/user/extensions.html
+
+
+Using a Notebook Image with Elyra Extension :
+	--> Get the Notebook Image :
+		podman image pull quay.io/elyra/elyra:3.15.0
+	or
+		podman image pull quay.io/aaiche/ai263-my-notebook-image-with-elyra
+
+	--> Execute Locally the Jupyter Notebook Image :
+		podman run -it -p 4242:8888 quay.io/aaiche/ai263-my-notebook-image-with-elyra
+
+		podman exec -l jupyter server list
+
+	--> Open the Notebook with Elyra Extension :	
+		firefox http://localhost:4242/lab?token=<token>
+
+
+
+
+Elyra Generic Pipelines :
+	https://github.com/elyra-ai/examples/tree/main/pipelines/introduction-to-generic-pipelines
+	https://developer.ibm.com/articles/create-ai-pipelines-using-elyra-and-kubeflow-pipelines/#ways-to-try-elyra-and-pipelines7
+	
+	--> Create a Pipeline :
+	--> Rename a Pipeline :
+		my-first-pipeline.pipeline
+		
+
+	--> get the code :
+		https://github.com/elyra-ai/examples.git
+
+	--> File Browse to :
+		examples/pipelines/introduction-to-generic-pipelines
+
+	--> Add Python Scripts or Python Notebooks to the Pipeline :
+
+	--> Access the node properties :
+		output file:
+			data/noaa-weather-data-jfk-airport/jfk_weather.csv
+		environment variable:
+		DATASET_URL
+			https://dax-cdn.cdn.appdomain.cloud/dax-noaa-weather-data-jfk-airport/1.1.4/noaa-weather-data-jfk-airport.tar.gz
+
+	--> Optionally, associate a comment to your node :
+		what this node is doing:
+		° Download the dataset
+		° It needs to read a
+		  Variable to locate the
+		  source dataset path 
+
+	--> Add a second file to the pipeline: Part 1 - Data Cleaning.ipynb
+		Comment:
+		Clean the Dataset
+
+	--> Customize the file's execution properties as follows:
+
+	        ° Runtime image: 
+			Pandas
+
+        	° Output files: 
+			data/noaa-weather-data-jfk-airport/jfk_weather_cleaned.csv
+
+
+	--> Extend the pipeline by adding 2 more notebooks :
+		Comments :
+			Analyze the Data
+			Explore Approaches to predicting future temperatures
+
+
+	--> Run the pipeline using the CLI :
+		$ elyra-pipeline run my-first-pipeline.pipeline 
+
+issue with numpy.bool
+	Solution --> downgrade numpy
+
+		python -m pip uninstall numpy
+		python -m pip install numpy==1.23.1
+
+
+
+podman container cp 00-LinearRegression.ipynb xxx:/home/jovyan/
+
+podman container cp 00-my-first-pipeline.pipeline xxx:/home/jovyan/
+
+
+

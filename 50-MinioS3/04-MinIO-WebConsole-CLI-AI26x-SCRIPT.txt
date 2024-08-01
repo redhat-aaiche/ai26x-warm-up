@@ -1,0 +1,30 @@
+Install the MC client :
+============================
+
+$ wget https://dl.min.io/client/mc/release/linux-amd64/mc
+
+$ chmod +x mc
+
+
+--> Set the endpoint :
+$ ./mc alias set minio1 http://localhost:9000 developer strongpassword
+
+
+--> Create a bucket :
+$ ./mc mb minio1/mydeveloper-bucket
+
+--> Upload a file to a bucket :
+$ touch myfile1.txt
+$ ./mc cp ./myfile1.txt minio1/mydeveloper-bucket/myfile1.txt
+
+
+--> List buckets :
+$ ./mc ls minio1
+
+
+--> List bucket content :
+$ ./mc ls minio1/mydeveloper-bucket
+
+
+
+
